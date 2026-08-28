@@ -1,0 +1,10 @@
+/*
+ * Manga: constant horizontal page shift
+ *
+ * Positive values move images right; negative values move them left.
+ * This example moves every image after the cover right by 10% of the page.
+ */
+DocFragment:not(:first-child) > body {
+  margin-left: 10vw !important;
+  margin-right: -10vw !important;
+}

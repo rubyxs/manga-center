@@ -1,0 +1,15 @@
+/*
+ * Manga: opposite horizontal shift on alternating spine pages
+ *
+ * The cover is spine item 1 and is left unchanged. Reverse all four signs if
+ * the book's page parity is opposite to this example.
+ */
+DocFragment:nth-child(odd):not(:first-child) > body {
+  margin-left: -4vw !important;
+  margin-right: 4vw !important;
+}
+
+DocFragment:nth-child(even) > body {
+  margin-left: 4vw !important;
+  margin-right: -4vw !important;
+}
