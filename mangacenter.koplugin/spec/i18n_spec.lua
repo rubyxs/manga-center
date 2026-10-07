@@ -5,7 +5,7 @@ describe("MangaCenter localization", function()
     local original_reader_settings
     local plugin_messages = {
         "Manga page shift",
-        [[Center visible manga artwork automatically or shift fixed-layout EPUB images manually.
+        [[Center visible manga artwork automatically in EPUB, PDF, DjVu, and comic archives, or shift fixed-layout EPUB images manually.
 Manual shifts can be constant or reversed automatically on alternating spine pages.]],
         "Manga horizontal shift",
         [[Positive values move constant-mode images right. Negative values move them left.
@@ -39,6 +39,30 @@ Applying a non-zero value enables the shift for this book.]],
         "Alternating",
         "Constant shift (static CSS)",
         "Alternating shift (static CSS)",
+        "Continuous manga width",
+        [[Applies to PDF, DjVu, and comic archives in continuous view when zoom is set to page width or content width.
+100% disables the extra zoom-out.]],
+        "Invalid value. Please enter a value from 50 to 100.",
+        "Continuous manga width: %1%",
+        "Fallback scroll overlap",
+        [[Percentage of the visible screen height repeated when panel-aware paging has no structural anchor to snap to. It is also used for ordinary continuous page-down when panel-aware paging is off.
+Enter 0 for no overlap. Leave the field blank to use KOReader's native overlap.]],
+        "Invalid value. Please enter a value from 0 to 90, or leave it blank for KOReader default.",
+        "Fallback scroll overlap: KOReader default",
+        "Fallback scroll overlap: %1%",
+        "Manga center (%1% width)",
+        "Manga center (auto, %1% width)",
+        "Manga center: continuous manga width",
+        "Manga center: fallback scroll overlap",
+        "Manga center: use KOReader default scroll overlap",
+        "Panel-aware page-down",
+        "Manga center: panel-aware page-down",
+        "Continuous scroll gesture multiplier",
+        [[Multiplies vertical finger movement in KOReader continuous scrolling.
+1.0x keeps native behavior; 0.5x halves it; 2.0x doubles it. It applies to Classic, Turbo, and On-release scrolling.]],
+        "Invalid value. Please enter a multiplier from 0.25 to 10.",
+        "Continuous scroll gesture multiplier: %1x",
+        "Manga center: continuous scroll gesture multiplier",
     }
 
     local function load_translation(language)
@@ -101,9 +125,9 @@ Applying a non-zero value enables the shift for this book.]],
 
     it("covers every plugin-owned message in both Chinese catalogues", function()
         for _, language in ipairs({ "zh_CN", "zh_TW" }) do
-            local _ = load_translation(language)
+            local translate = load_translation(language)
             for _, message in ipairs(plugin_messages) do
-                assert.are_not.equals(message, _(message), language .. ": " .. message)
+                assert.are_not.equals(message, translate(message), language .. ": " .. message)
             end
         end
     end)
